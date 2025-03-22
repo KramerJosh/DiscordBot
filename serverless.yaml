@@ -1,4 +1,4 @@
-service: sudoku-api
+service: slackbot
 useDotenv: true
 frameworkVersion: '3'
 
@@ -12,29 +12,23 @@ provider:
       statements:
       - Effect: Allow
         Action: 'sns:*'
-        Resource: 'arn:aws:sns:us-east-1:481665087818:BOOTCAMP_TOPIC'
+        Resource: 'arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS'
 
 functions:
-  get-new-game:
-    handler: src/getNewGame.handler
-    events:
-      - httpApi:
-          path: /getsudoku
-          method: get
-  get-mongodb-data:
-    handler: src/getMongodbData.handler
-    events:
-      - httpApi:
-          path: /getmongodbdata
-          method: get
   read-from-topic:
     handler: src/readFromTopic.handler
     events:
       - sns:
-          arn: arn:aws:sns:us-east-1:481665087818:BOOTCAMP_TOPIC
+          arn: arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS
   post-message:
     handler: src/postToTopic.handler
     events:
       - httpApi:
           path: /posttotopic
           method: post
+  slackbot:
+    handler: src/postToSlack.handler
+    events:
+      - httpApi:
+        path: /posttoslack
+        method: post

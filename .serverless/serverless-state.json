@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "sudoku-api",
+    "service": "slackbot",
     "serviceObject": {
-      "name": "sudoku-api"
+      "name": "slackbot"
     },
     "provider": {
       "name": "aws",
@@ -18,7 +18,7 @@
               "Action": [
                 "sns:*"
               ],
-              "Resource": "arn:aws:sns:us-east-1:481665087818:BOOTCAMP_TOPIC"
+              "Resource": "arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS"
             }
           ]
         }
@@ -99,28 +99,22 @@
               }
             }
           },
-          "GetDashnewDashgameLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/sudoku-api-dev-get-new-game"
-            }
-          },
-          "GetDashmongodbDashdataLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/sudoku-api-dev-get-mongodb-data"
-            }
-          },
           "ReadDashfromDashtopicLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/sudoku-api-dev-read-from-topic"
+              "LogGroupName": "/aws/lambda/slackbot-dev-read-from-topic"
             }
           },
           "PostDashmessageLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/sudoku-api-dev-post-message"
+              "LogGroupName": "/aws/lambda/slackbot-dev-post-message"
+            }
+          },
+          "SlackbotLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/slackbot-dev-slackbot"
             }
           },
           "IamRoleLambdaExecution": {
@@ -148,7 +142,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "sudoku-api",
+                        "slackbot",
                         "dev",
                         "lambda"
                       ]
@@ -166,7 +160,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sudoku-api-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/slackbot-dev*:*"
                           }
                         ]
                       },
@@ -177,7 +171,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sudoku-api-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/slackbot-dev*:*:*"
                           }
                         ]
                       },
@@ -193,7 +187,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "sudoku-api",
+                    "slackbot",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -204,66 +198,6 @@
               }
             }
           },
-          "GetDashnewDashgameLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/sudoku-api/dev/1741916395106-2025-03-14T01:39:55.106Z/sudoku-api.zip"
-              },
-              "Handler": "src/getNewGame.handler",
-              "Runtime": "nodejs20.x",
-              "FunctionName": "sudoku-api-dev-get-new-game",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetDashnewDashgameLogGroup"
-            ]
-          },
-          "GetDashmongodbDashdataLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/sudoku-api/dev/1741916395106-2025-03-14T01:39:55.106Z/sudoku-api.zip"
-              },
-              "Handler": "src/getMongodbData.handler",
-              "Runtime": "nodejs20.x",
-              "FunctionName": "sudoku-api-dev-get-mongodb-data",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetDashmongodbDashdataLogGroup"
-            ]
-          },
           "ReadDashfromDashtopicLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -271,11 +205,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/sudoku-api/dev/1741916395106-2025-03-14T01:39:55.106Z/sudoku-api.zip"
+                "S3Key": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z/slackbot.zip"
               },
               "Handler": "src/readFromTopic.handler",
               "Runtime": "nodejs20.x",
-              "FunctionName": "sudoku-api-dev-read-from-topic",
+              "FunctionName": "slackbot-dev-read-from-topic",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
@@ -301,11 +235,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/sudoku-api/dev/1741916395106-2025-03-14T01:39:55.106Z/sudoku-api.zip"
+                "S3Key": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z/slackbot.zip"
               },
               "Handler": "src/postToTopic.handler",
               "Runtime": "nodejs20.x",
-              "FunctionName": "sudoku-api-dev-post-message",
+              "FunctionName": "slackbot-dev-post-message",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
@@ -324,50 +258,70 @@
               "PostDashmessageLogGroup"
             ]
           },
-          "GetDashnewDashgameLambdaVersionmPKxwa1JtXbwktSfuMyjnFsiIA8EVRYyBzOjfDhi5o": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
+          "SlackbotLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
             "Properties": {
-              "FunctionName": {
-                "Ref": "GetDashnewDashgameLambdaFunction"
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z/slackbot.zip"
               },
-              "CodeSha256": "rlDvk1UjNSoyd9z3kyyFn+jtkBebiuU25RvoRAfKPr8="
-            }
-          },
-          "GetDashmongodbDashdataLambdaVersionT3NFh5z5LIXEQs8eSlKQ13gf4Iz6PRENIiSCKYi5TD0": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetDashmongodbDashdataLambdaFunction"
+              "Handler": "src/postToSlack.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "slackbot-dev-slackbot",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0"
+                }
               },
-              "CodeSha256": "rlDvk1UjNSoyd9z3kyyFn+jtkBebiuU25RvoRAfKPr8="
-            }
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "SlackbotLogGroup"
+            ]
           },
-          "ReadDashfromDashtopicLambdaVersionsElGu1X35koe5xl3DdmnCdiyUJROq4NbKh7trnlJkI": {
+          "ReadDashfromDashtopicLambdaVersionExG3jT6Ha8din9ZMKtNysP52pLMsHUIHP2K0MxP68": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ReadDashfromDashtopicLambdaFunction"
               },
-              "CodeSha256": "rlDvk1UjNSoyd9z3kyyFn+jtkBebiuU25RvoRAfKPr8="
+              "CodeSha256": "/VKnWJnvREbGM7LmLxTHhaoKFsFGyKTDQau8WfPz3rQ="
             }
           },
-          "PostDashmessageLambdaVersionLg1tq2jEXtgRKkQNupQwBxAzi7tWJQen0GwDNuVMM": {
+          "PostDashmessageLambdaVersionjjWycGl0FTeRdrfJvORRA0Ba6fXbBCKwMT6cMw8uK8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PostDashmessageLambdaFunction"
               },
-              "CodeSha256": "rlDvk1UjNSoyd9z3kyyFn+jtkBebiuU25RvoRAfKPr8="
+              "CodeSha256": "/VKnWJnvREbGM7LmLxTHhaoKFsFGyKTDQau8WfPz3rQ="
             }
           },
-          "ReadDashfromDashtopicSnsSubscriptionBOOTCAMPTOPIC": {
+          "SlackbotLambdaVersion2nEATim2MxQMjZFmMfQC7sQ5WWsgnYMGPmP3PGq1K4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SlackbotLambdaFunction"
+              },
+              "CodeSha256": "/VKnWJnvREbGM7LmLxTHhaoKFsFGyKTDQau8WfPz3rQ="
+            }
+          },
+          "ReadDashfromDashtopicSnsSubscriptionALERTNOTIFICATIONS": {
             "Type": "AWS::SNS::Subscription",
             "Properties": {
-              "TopicArn": "arn:aws:sns:us-east-1:481665087818:BOOTCAMP_TOPIC",
+              "TopicArn": "arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS",
               "Protocol": "lambda",
               "Endpoint": {
                 "Fn::GetAtt": [
@@ -377,7 +331,7 @@
               }
             }
           },
-          "ReadDashfromDashtopicLambdaPermissionBOOTCAMPTOPICSNS": {
+          "ReadDashfromDashtopicLambdaPermissionALERTNOTIFICATIONSSNS": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -388,13 +342,13 @@
               },
               "Action": "lambda:InvokeFunction",
               "Principal": "sns.amazonaws.com",
-              "SourceArn": "arn:aws:sns:us-east-1:481665087818:BOOTCAMP_TOPIC"
+              "SourceArn": "arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS"
             }
           },
           "HttpApi": {
             "Type": "AWS::ApiGatewayV2::Api",
             "Properties": {
-              "Name": "dev-sudoku-api",
+              "Name": "dev-slackbot",
               "ProtocolType": "HTTP"
             }
           },
@@ -410,150 +364,6 @@
                 "DetailedMetricsEnabled": false
               }
             }
-          },
-          "GetDashnewDashgameLambdaPermissionHttpApi": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetDashnewDashgameLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "HttpApi"
-                    },
-                    "/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "HttpApiIntegrationGetDashnewDashgame": {
-            "Type": "AWS::ApiGatewayV2::Integration",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "IntegrationType": "AWS_PROXY",
-              "IntegrationUri": {
-                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetDashnewDashgameLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
-              },
-              "PayloadFormatVersion": "2.0",
-              "TimeoutInMillis": 30000
-            }
-          },
-          "HttpApiRouteGetGetsudoku": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "RouteKey": "GET /getsudoku",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "HttpApiIntegrationGetDashnewDashgame"
-                    }
-                  ]
-                ]
-              }
-            },
-            "DependsOn": "HttpApiIntegrationGetDashnewDashgame"
-          },
-          "GetDashmongodbDashdataLambdaPermissionHttpApi": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetDashmongodbDashdataLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "HttpApi"
-                    },
-                    "/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "HttpApiIntegrationGetDashmongodbDashdata": {
-            "Type": "AWS::ApiGatewayV2::Integration",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "IntegrationType": "AWS_PROXY",
-              "IntegrationUri": {
-                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetDashmongodbDashdataLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
-              },
-              "PayloadFormatVersion": "2.0",
-              "TimeoutInMillis": 30000
-            }
-          },
-          "HttpApiRouteGetGetmongodbdata": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "RouteKey": "GET /getmongodbdata",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "HttpApiIntegrationGetDashmongodbDashdata"
-                    }
-                  ]
-                ]
-              }
-            },
-            "DependsOn": "HttpApiIntegrationGetDashmongodbDashdata"
           },
           "PostDashmessageLambdaPermissionHttpApi": {
             "Type": "AWS::Lambda::Permission",
@@ -634,43 +444,34 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-sudoku-api-dev-ServerlessDeploymentBucketName"
-            }
-          },
-          "GetDashnewDashgameLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetDashnewDashgameLambdaVersionmPKxwa1JtXbwktSfuMyjnFsiIA8EVRYyBzOjfDhi5o"
-            },
-            "Export": {
-              "Name": "sls-sudoku-api-dev-GetDashnewDashgameLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetDashmongodbDashdataLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetDashmongodbDashdataLambdaVersionT3NFh5z5LIXEQs8eSlKQ13gf4Iz6PRENIiSCKYi5TD0"
-            },
-            "Export": {
-              "Name": "sls-sudoku-api-dev-GetDashmongodbDashdataLambdaFunctionQualifiedArn"
+              "Name": "sls-slackbot-dev-ServerlessDeploymentBucketName"
             }
           },
           "ReadDashfromDashtopicLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ReadDashfromDashtopicLambdaVersionsElGu1X35koe5xl3DdmnCdiyUJROq4NbKh7trnlJkI"
+              "Ref": "ReadDashfromDashtopicLambdaVersionExG3jT6Ha8din9ZMKtNysP52pLMsHUIHP2K0MxP68"
             },
             "Export": {
-              "Name": "sls-sudoku-api-dev-ReadDashfromDashtopicLambdaFunctionQualifiedArn"
+              "Name": "sls-slackbot-dev-ReadDashfromDashtopicLambdaFunctionQualifiedArn"
             }
           },
           "PostDashmessageLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostDashmessageLambdaVersionLg1tq2jEXtgRKkQNupQwBxAzi7tWJQen0GwDNuVMM"
+              "Ref": "PostDashmessageLambdaVersionjjWycGl0FTeRdrfJvORRA0Ba6fXbBCKwMT6cMw8uK8"
             },
             "Export": {
-              "Name": "sls-sudoku-api-dev-PostDashmessageLambdaFunctionQualifiedArn"
+              "Name": "sls-slackbot-dev-PostDashmessageLambdaFunctionQualifiedArn"
+            }
+          },
+          "SlackbotLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SlackbotLambdaVersion2nEATim2MxQMjZFmMfQC7sQ5WWsgnYMGPmP3PGq1K4"
+            },
+            "Export": {
+              "Name": "sls-slackbot-dev-SlackbotLambdaFunctionQualifiedArn"
             }
           },
           "HttpApiId": {
@@ -679,7 +480,7 @@
               "Ref": "HttpApi"
             },
             "Export": {
-              "Name": "sls-sudoku-api-dev-HttpApiId"
+              "Name": "sls-slackbot-dev-HttpApiId"
             }
           },
           "HttpApiUrl": {
@@ -704,7 +505,7 @@
               ]
             },
             "Export": {
-              "Name": "sls-sudoku-api-dev-HttpApiUrl"
+              "Name": "sls-slackbot-dev-HttpApiUrl"
             }
           }
         }
@@ -795,62 +596,22 @@
     },
     "pluginsData": {},
     "functions": {
-      "get-new-game": {
-        "handler": "src/getNewGame.handler",
-        "events": [
-          {
-            "httpApi": {
-              "path": "/getsudoku",
-              "method": "get"
-            },
-            "resolvedMethod": "GET",
-            "resolvedPath": "/getsudoku"
-          }
-        ],
-        "name": "sudoku-api-dev-get-new-game",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs20.x",
-        "vpc": {},
-        "versionLogicalId": "GetDashnewDashgameLambdaVersionmPKxwa1JtXbwktSfuMyjnFsiIA8EVRYyBzOjfDhi5o"
-      },
-      "get-mongodb-data": {
-        "handler": "src/getMongodbData.handler",
-        "events": [
-          {
-            "httpApi": {
-              "path": "/getmongodbdata",
-              "method": "get"
-            },
-            "resolvedMethod": "GET",
-            "resolvedPath": "/getmongodbdata"
-          }
-        ],
-        "name": "sudoku-api-dev-get-mongodb-data",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs20.x",
-        "vpc": {},
-        "versionLogicalId": "GetDashmongodbDashdataLambdaVersionT3NFh5z5LIXEQs8eSlKQ13gf4Iz6PRENIiSCKYi5TD0"
-      },
       "read-from-topic": {
         "handler": "src/readFromTopic.handler",
         "events": [
           {
             "sns": {
-              "arn": "arn:aws:sns:us-east-1:481665087818:BOOTCAMP_TOPIC"
+              "arn": "arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS"
             }
           }
         ],
-        "name": "sudoku-api-dev-read-from-topic",
+        "name": "slackbot-dev-read-from-topic",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "ReadDashfromDashtopicLambdaVersionsElGu1X35koe5xl3DdmnCdiyUJROq4NbKh7trnlJkI"
+        "versionLogicalId": "ReadDashfromDashtopicLambdaVersionExG3jT6Ha8din9ZMKtNysP52pLMsHUIHP2K0MxP68"
       },
       "post-message": {
         "handler": "src/postToTopic.handler",
@@ -864,19 +625,36 @@
             "resolvedPath": "/posttotopic"
           }
         ],
-        "name": "sudoku-api-dev-post-message",
+        "name": "slackbot-dev-post-message",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "PostDashmessageLambdaVersionLg1tq2jEXtgRKkQNupQwBxAzi7tWJQen0GwDNuVMM"
+        "versionLogicalId": "PostDashmessageLambdaVersionjjWycGl0FTeRdrfJvORRA0Ba6fXbBCKwMT6cMw8uK8"
+      },
+      "slackbot": {
+        "handler": "src/postToSlack.handler",
+        "events": [
+          {
+            "path": "/posttoslack",
+            "method": "post",
+            "httpApi": null
+          }
+        ],
+        "name": "slackbot-dev-slackbot",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "SlackbotLambdaVersion2nEATim2MxQMjZFmMfQC7sQ5WWsgnYMGPmP3PGq1K4"
       }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yaml",
     "initialServerlessConfig": {
-      "service": "sudoku-api",
+      "service": "slackbot",
       "useDotenv": true,
       "frameworkVersion": "3",
       "provider": {
@@ -888,10 +666,10 @@
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "C:\\Users\\krame\\bootcamp\\CU-VIRT-FSF-PT-10-2024-U-LOLC\\20-Deployment-CI-CD\\01-Activities\\00-serverless-api\\serverless-api\\.serverless\\sudoku-api.zip"
+    "artifact": "C:\\Users\\krame\\bootcamp\\Challenge20\\DiscordBot\\.serverless\\slackbot.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/sudoku-api/dev/1741916395106-2025-03-14T01:39:55.106Z",
-    "artifact": "sudoku-api.zip"
+    "artifactDirectoryName": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z",
+    "artifact": "slackbot.zip"
   }
 }
