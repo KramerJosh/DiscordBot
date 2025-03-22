@@ -1,0 +1,26 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "deploy:dev": "npx serverless deploy -s dev",
+    "deploy:prod": "npx serverless deploy -s prod",
+    "remove:dev": "npx serverless remove -s dev",
+    "remove:prod": "npx serverless remove -s prod",
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.4.7",
+    "mongodb": "^6.8.0"
+  },
+  "devDependencies": {
+    "@serverless/eslint-config": "^5.0.1",
+    "eslint": "^8.23.1",
+    "eslint-plugin-import": "^2.26.0",
+    "serverless": "^3.22.0"
+  }
+}
