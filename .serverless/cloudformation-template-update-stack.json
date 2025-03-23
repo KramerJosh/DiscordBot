@@ -181,7 +181,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z/slackbot.zip"
+          "S3Key": "serverless/slackbot/dev/1742688373817-2025-03-23T00:06:13.817Z/slackbot.zip"
         },
         "Handler": "src/readFromTopic.handler",
         "Runtime": "nodejs20.x",
@@ -190,7 +190,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0"
+            "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0",
+            "SLACK_URL": "https://hooks.slack.com/services/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"
           }
         },
         "Role": {
@@ -211,7 +212,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z/slackbot.zip"
+          "S3Key": "serverless/slackbot/dev/1742688373817-2025-03-23T00:06:13.817Z/slackbot.zip"
         },
         "Handler": "src/postToTopic.handler",
         "Runtime": "nodejs20.x",
@@ -220,7 +221,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0"
+            "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0",
+            "SLACK_URL": "https://hooks.slack.com/services/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"
           }
         },
         "Role": {
@@ -241,7 +243,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/slackbot/dev/1742687054182-2025-03-22T23:44:14.182Z/slackbot.zip"
+          "S3Key": "serverless/slackbot/dev/1742688373817-2025-03-23T00:06:13.817Z/slackbot.zip"
         },
         "Handler": "src/postToSlack.handler",
         "Runtime": "nodejs20.x",
@@ -250,7 +252,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0"
+            "MONGODB_URI": "mongodb+srv://kramerjoshkramerjosh:roXVCLv1MUtfb1Tv@cluster0.ydmxy.mongodb.net/aws_test?retryWrites=true&w=majority&appName=Cluster0",
+            "SLACK_URL": "https://hooks.slack.com/services/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"
           }
         },
         "Role": {
@@ -264,34 +267,34 @@
         "SlackbotLogGroup"
       ]
     },
-    "ReadDashfromDashtopicLambdaVersionExG3jT6Ha8din9ZMKtNysP52pLMsHUIHP2K0MxP68": {
+    "ReadDashfromDashtopicLambdaVersionhVzR0WklDsSnoQUVcnWlR93VMJ5goimBNPbGil9iE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ReadDashfromDashtopicLambdaFunction"
         },
-        "CodeSha256": "/VKnWJnvREbGM7LmLxTHhaoKFsFGyKTDQau8WfPz3rQ="
+        "CodeSha256": "bWoMPzNgTcotaLGbZbkwrXGVGJUV06pJdgA5sTY+AFA="
       }
     },
-    "PostDashmessageLambdaVersionjjWycGl0FTeRdrfJvORRA0Ba6fXbBCKwMT6cMw8uK8": {
+    "PostDashmessageLambdaVersionIbiMgLs4mSzVYdqBcYe9Dr3tGQOa9eIV8xwk9be01Ng": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostDashmessageLambdaFunction"
         },
-        "CodeSha256": "/VKnWJnvREbGM7LmLxTHhaoKFsFGyKTDQau8WfPz3rQ="
+        "CodeSha256": "bWoMPzNgTcotaLGbZbkwrXGVGJUV06pJdgA5sTY+AFA="
       }
     },
-    "SlackbotLambdaVersion2nEATim2MxQMjZFmMfQC7sQ5WWsgnYMGPmP3PGq1K4": {
+    "SlackbotLambdaVersionKQDbzuUrqB5wLy1GhLGbom1Fwg1ZKPTJK9S82ZLaI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SlackbotLambdaFunction"
         },
-        "CodeSha256": "/VKnWJnvREbGM7LmLxTHhaoKFsFGyKTDQau8WfPz3rQ="
+        "CodeSha256": "bWoMPzNgTcotaLGbZbkwrXGVGJUV06pJdgA5sTY+AFA="
       }
     },
     "ReadDashfromDashtopicSnsSubscriptionALERTNOTIFICATIONS": {
@@ -313,6 +316,33 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "ReadDashfromDashtopicLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "sns.amazonaws.com",
+        "SourceArn": "arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS"
+      }
+    },
+    "SlackbotSnsSubscriptionALERTNOTIFICATIONS": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "TopicArn": "arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS",
+        "Protocol": "lambda",
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "SlackbotLambdaFunction",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "SlackbotLambdaPermissionALERTNOTIFICATIONSSNS": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "SlackbotLambdaFunction",
             "Arn"
           ]
         },
@@ -429,7 +459,7 @@
     "ReadDashfromDashtopicLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ReadDashfromDashtopicLambdaVersionExG3jT6Ha8din9ZMKtNysP52pLMsHUIHP2K0MxP68"
+        "Ref": "ReadDashfromDashtopicLambdaVersionhVzR0WklDsSnoQUVcnWlR93VMJ5goimBNPbGil9iE"
       },
       "Export": {
         "Name": "sls-slackbot-dev-ReadDashfromDashtopicLambdaFunctionQualifiedArn"
@@ -438,7 +468,7 @@
     "PostDashmessageLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostDashmessageLambdaVersionjjWycGl0FTeRdrfJvORRA0Ba6fXbBCKwMT6cMw8uK8"
+        "Ref": "PostDashmessageLambdaVersionIbiMgLs4mSzVYdqBcYe9Dr3tGQOa9eIV8xwk9be01Ng"
       },
       "Export": {
         "Name": "sls-slackbot-dev-PostDashmessageLambdaFunctionQualifiedArn"
@@ -447,7 +477,7 @@
     "SlackbotLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SlackbotLambdaVersion2nEATim2MxQMjZFmMfQC7sQ5WWsgnYMGPmP3PGq1K4"
+        "Ref": "SlackbotLambdaVersionKQDbzuUrqB5wLy1GhLGbom1Fwg1ZKPTJK9S82ZLaI"
       },
       "Export": {
         "Name": "sls-slackbot-dev-SlackbotLambdaFunctionQualifiedArn"

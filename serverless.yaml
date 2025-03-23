@@ -7,6 +7,7 @@ provider:
   runtime: nodejs20.x
   environment:
    MONGODB_URI: ${env:MONGODB_URI}
+   SLACK_URL: ${env:SLACK_URL}
   iam: 
     role:
       statements:
@@ -29,6 +30,5 @@ functions:
   slackbot:
     handler: src/postToSlack.handler
     events:
-      - httpApi:
-        path: /posttoslack
-        method: post
+      - sns:
+          arn: arn:aws:sns:us-east-1:481665087818:ALERT_NOTIFICATIONS
