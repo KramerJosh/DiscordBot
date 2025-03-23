@@ -206,7 +206,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z/slackbot.zip"
+                "S3Key": "serverless/slackbot/dev/1742748838992-2025-03-23T16:53:58.992Z/slackbot.zip"
               },
               "Handler": "src/readFromTopic.handler",
               "Runtime": "nodejs20.x",
@@ -237,7 +237,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z/slackbot.zip"
+                "S3Key": "serverless/slackbot/dev/1742748838992-2025-03-23T16:53:58.992Z/slackbot.zip"
               },
               "Handler": "src/postToTopic.handler",
               "Runtime": "nodejs20.x",
@@ -268,7 +268,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z/slackbot.zip"
+                "S3Key": "serverless/slackbot/dev/1742748838992-2025-03-23T16:53:58.992Z/slackbot.zip"
               },
               "Handler": "src/postToSlack.handler",
               "Runtime": "nodejs20.x",
@@ -700,7 +700,7 @@
     "artifact": "C:\\Users\\krame\\bootcamp\\Challenge20\\DiscordBot\\.serverless\\slackbot.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z",
+    "artifactDirectoryName": "serverless/slackbot/dev/1742748838992-2025-03-23T16:53:58.992Z",
     "artifact": "slackbot.zip"
   }
 }
