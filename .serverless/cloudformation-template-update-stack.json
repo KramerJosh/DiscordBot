@@ -181,7 +181,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/slackbot/dev/1742689215910-2025-03-23T00:20:15.910Z/slackbot.zip"
+          "S3Key": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z/slackbot.zip"
         },
         "Handler": "src/readFromTopic.handler",
         "Runtime": "nodejs20.x",
@@ -212,7 +212,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/slackbot/dev/1742689215910-2025-03-23T00:20:15.910Z/slackbot.zip"
+          "S3Key": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z/slackbot.zip"
         },
         "Handler": "src/postToTopic.handler",
         "Runtime": "nodejs20.x",
@@ -243,7 +243,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/slackbot/dev/1742689215910-2025-03-23T00:20:15.910Z/slackbot.zip"
+          "S3Key": "serverless/slackbot/dev/1742748643454-2025-03-23T16:50:43.454Z/slackbot.zip"
         },
         "Handler": "src/postToSlack.handler",
         "Runtime": "nodejs20.x",
