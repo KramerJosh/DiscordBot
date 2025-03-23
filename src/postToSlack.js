@@ -4,24 +4,26 @@ const handler = async (event) => {
   try {
     console.log("Received SNS Event:", JSON.stringify(event, null, 2));
 
-    // Extract the actual message from SNS
+    // event.Records is the list of posts sent to the topic
+    // [0] is the index of the first item in that list
     const snsMessage = event.Records?.[0]?.Sns?.Message || "No message received";
 
-    // Ensure message is plain text (SNS might send a JSON string)
+    // Ensure message is plain text
     let messageText;
     try {
-      const parsedMessage = JSON.parse(snsMessage); // Attempt to parse if it's JSON
+      const parsedMessage = JSON.parse(snsMessage);
       messageText = parsedMessage.text || parsedMessage.message || JSON.stringify(parsedMessage);
     } catch (e) {
-      messageText = snsMessage; // Use raw text if parsing fails
+      messageText = snsMessage;
     }
 
+    // send a Post request to my slackbot URL, body will be "text": Message
     const response = await fetch(slackURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ text: messageText }), // Send plain text message
+      body: JSON.stringify({ text: messageText }),
     });
 
     if (!response.ok) {
