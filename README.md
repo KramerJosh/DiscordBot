@@ -18,8 +18,17 @@ There are 3 lambda functions included that handle the following:
     postToSlack sends a slack message to the desired channel whenever the topic recieves a new message.
         enter your slack URL in the SLACK_URL field in the .env
 
-## TODO 
-    
-    Create new SNS topic
-    Clean up routes a little in serverless.yaml
-    
+### AWS SNS
+I created a SNS topic which I can post messages to, and get messages from.  I use the lambda's described above to handle these actions.
+
+# Installation
+Prior to installation you'll want to create your own slack chanell and SNS topic.  Once you have the URLs for these, throw them in a .env file.
+Clone or fork this repo to your machine and npm i to install any depencies.
+Once that's done, run npm run deploy:dev to get your lambdas live, and copy the url your console sends back.
+
+# Usage
+Once you've installed and run the program, take the url you've gotten back from your console and do a POST request to it formatted like this:
+    {
+        "message": "CONTENT"
+    }
+and the content you POST should appear in slack.
